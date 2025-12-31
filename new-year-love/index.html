@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy New Year ❤️</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #ff5f9e, #ffc371);
+    color: white;
+    overflow-x: hidden;
+    text-align: center;
+}
+
+/* Heading */
+h1 {
+    margin-top: 40px;
+    font-size: 3.2em;
+    animation: fadeIn 2s ease-in-out;
+}
+
+/* Message box */
+.message {
+    max-width: 750px;
+    margin: 30px auto;
+    background: rgba(0,0,0,0.25);
+    padding: 25px;
+    border-radius: 20px;
+    font-size: 1.2em;
+    line-height: 1.7;
+    display: none; /* Hide initially */
+}
+
+/* Gallery */
+.gallery {
+    display: none; /* Hide initially */
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin: 40px;
+}
+
+.gallery img {
+    width: 200px;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 18px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+    transition: transform 0.4s;
+    opacity: 0; /* Start invisible */
+}
+
+.gallery img:hover {
+    transform: scale(1.08);
+}
+
+/* Button */
+button {
+    padding: 14px 30px;
+    font-size: 16px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    background: white;
+    color: #ff3e6c;
+    margin-bottom: 40px;
+    transition: 0.3s;
+    display: none; /* Hide initially */
+}
+
+button:hover {
+    background: #ffe0eb;
+}
+
+/* Footer */
+footer {
+    margin-bottom: 25px;
+    font-size: 14px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+/* Fade-in for content */
+.fade-in {
+    animation: fadeInContent 2s ease forwards;
+}
+
+@keyframes fadeInContent {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Falling hearts */
+.heart {
+    position: fixed;
+    top: -10px;
+    color: pink;
+    font-size: 20px;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+}
+
+/* Popup */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background: #ff4f81;
+    padding: 30px;
+    border-radius: 20px;
+    max-width: 400px;
+    text-align: center;
+}
+</style>
+</head>
+
+<body>
+
+<!-- Surprise Popup -->
+<div class="popup" id="popup">
+    <div class="popup-content">
+        <h2>💖 Surprise 💖</h2>
+        <p>
+          Alien,  You are the best thing that ever happened to me.  
+            I can’t wait to make countless memories with you this year ❤️
+        </p>
+        <button id="closePopupBtn">Continue</button>
+    </div>
+</div>
+
+<h1>🎉 Happy New Year My Love ❤️</h1>
+
+<div class="message" id="mainContent">
+    Another year begins, and my heart chooses you again, Alien.
+    Thank you for being my happiness, my comfort, and my favorite person.
+    I promise to love you harder, laugh louder with you,
+    and stand by you in every moment this year and always. 💫
+    <br><br>
+    Happy New Year, my beautiful ❤️
+</div>
+
+<div class="gallery" id="gallery">
+    <img src="images/photo1.jpg.jpeg" 
+    <img src="images/photo2.jpg.jpeg" 
+    <img src="images/photo3.jpg.jpeg" 
+    <img src="images/photo4.jpg.jpeg"
+</div>
+
+<button id="playButton" onclick="playSong()">▶ Play Our Song</button>
+
+<audio id="song" loop>
+    <source src="music/song.mp3.mp3" 
+</audio>
+
+<footer>
+    Made with endless love ❤️
+</footer>
+
+<script>
+/* Hearts */
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = Math.random() * 3 + 3 + "s";
+    document.body.appendChild(heart);
+    setTimeout(() => { heart.remove(); }, 6000);
+}
+
+let heartInterval; // To start hearts later
+
+/* Popup behavior */
+window.onload = function() {
+    const popup = document.getElementById('popup');
+    const btn = document.getElementById('closePopupBtn');
+
+    popup.style.display = 'flex'; // show popup
+
+    btn.addEventListener('click', () => {
+        popup.style.display = 'none';
+
+        const mainContent = document.getElementById('mainContent');
+        const gallery = document.getElementById('gallery');
+        const playButton = document.getElementById('playButton');
+        const song = document.getElementById('song');
+
+        // Show message and play button
+        mainContent.style.display = 'block';
+        mainContent.classList.add('fade-in');
+
+        playButton.style.display = 'inline-block';
+        playButton.classList.add('fade-in');
+
+        // Show gallery images one by one
+        gallery.style.display = 'flex';
+        const images = gallery.querySelectorAll('img');
+        images.forEach((img, index) => {
+            img.style.opacity = 0; // start invisible
+            setTimeout(() => {
+                img.classList.add('fade-in');
+            }, index * 400); // stagger
+        });
+
+        // Start hearts after content appears
+        setTimeout(() => {
+            heartInterval = setInterval(createHeart, 300);
+        }, 500);
+
+        // Play song automatically
+        song.play();
+    });
+};
+
+/* Song play function for manual click */
+function playSong() {
+    document.getElementById("song").play();
+}
+</script>
+
+</body>
+</html>
