@@ -166,17 +166,19 @@ footer {
     Happy New Year, my beautiful ❤️
 </div>
 
-<div class="gallery" id="gallery">
-    <img src="images/photo1.jpg.jpeg" 
-    <img src="images/photo2.jpg.jpeg" 
-    <img src="images/photo3.jpg.jpeg" 
-    <img src="images/photo4.jpg.jpeg"
+<div  class="gallery" id="gallery">
+    <img src="images/photo1.jpg" onerror="this.src='images/photo1.jpeg'">
+    <img src="images/photo2.jpg" onerror="this.src='images/photo2.jpeg'">
+    <img src="images/photo3.jpg" onerror="this.src='images/photo3.jpeg'">
+    <img src="images/photo4.jpg" onerror="this.src='images/photo4.jpeg'">
 </div>
 
 <button id="playButton" onclick="playSong()">▶ Play Our Song</button>
 
-<audio id="song" loop>
-    <source src="music/song.mp3.mp3" 
+<audio  id="song" loop>
+    <source src="music/song.mp3" type="audio/mpeg">
+    <source src="music/song.mp3.mp3" type="audio/mpeg">
+    Your browser does not support the audio element. 
 </audio>
 
 <footer>
@@ -247,3 +249,4 @@ function playSong() {
 
 </body>
 </html>
+
